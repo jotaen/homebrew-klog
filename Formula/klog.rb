@@ -1,8 +1,8 @@
 class Klog < Formula
   desc "Time tracking CLI with plain-text files"
   homepage "https://github.com/jotaen/klog"
-  url "https://github.com/jotaen/klog/releases/download/v5.0/klog-mac-intel.zip"
-  sha256 "2ca9b3f164a2056a1997d3355dd7b2833284f0ecc685d450dac42611f7bb6470"
+  url "https://github.com/jotaen/klog/releases/download/v5.1/klog-mac-intel.zip"
+  sha256 "6c43f3a882d20fc44d2dd5773d3cfb500009d102dbfa050580690773dc1a933e"
   license "MIT"
   def install
     bin.install "klog"
