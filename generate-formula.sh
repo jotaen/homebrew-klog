@@ -8,6 +8,7 @@ apt-get install -y curl unzip jq
 TEMPDIR=$(mktemp -d)
 pushd $TEMPDIR
 
+echo 'Gathering info...'
 curl \
 	--remote-name \
 	--location \
@@ -22,6 +23,10 @@ VERSION="$(curl --silent https://api.github.com/repos/jotaen/klog/releases/lates
 
 popd
 
+echo "Checksum: ${SHASUM}"
+echo "Version: ${VERSION}"
+
+echo 'Writing formula...'
 echo "class Klog < Formula
   desc 'Time tracking CLI with plain-text files'
   homepage 'https://github.com/jotaen/klog'
