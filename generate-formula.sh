@@ -2,7 +2,11 @@
 
 set -e
 
-sudo apt-get update && sudo apt-get install -y curl jq
+if command -v jq >/dev/null && command -v curl >/dev/null; then
+  echo "jq and curl found - skipping"
+else
+  sudo apt-get update && sudo apt-get install -y curl jq
+fi
 
 echo 'Gathering info...'
 
