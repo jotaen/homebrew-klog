@@ -1,0 +1,18 @@
+name: Update Formula
+on: [workflow_dispatch]
+jobs:
+  generate_formula:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Run script file
+      run: |
+         ./.github/generate-formula.sh --install
+      shell: sh
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v9
+      with:
+        default_author: github_actions
+        message: 'updated Formula'
+        add: 'Formula/klog.rb'

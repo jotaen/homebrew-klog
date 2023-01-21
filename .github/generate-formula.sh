@@ -45,4 +45,4 @@ echo "class Klog < Formula
   def install
     bin.install 'klog'
   end
-end" > formula/klog.rb
+end" > ./Formula/klog.rb
