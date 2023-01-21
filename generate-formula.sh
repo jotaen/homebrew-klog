@@ -1,27 +1,14 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 
-apt-get update
-apt-get install -y curl unzip jq
-
-TEMPDIR=$(mktemp -d)
-pushd $TEMPDIR
+sudo apt update && sudo apt install -y curl jq
 
 echo 'Gathering info...'
-curl \
-	--remote-name \
-	--location \
-	--silent \
-	https://github.com/jotaen/klog/releases/latest/download/klog-mac-intel.zip
 
-unzip klog-mac-intel.zip
-
-SHASUM="$(sha256sum klog-mac-intel.zip | head -c 64)"
+SHASUM="$(curl -sL https://github.com/jotaen/klog/releases/download/latest/klog-mac-intel.zip | sha256sum | head -c 64)"
 
 VERSION="$(curl --silent https://api.github.com/repos/jotaen/klog/releases/latest | jq -r '.name')"
-
-popd
 
 echo "Checksum: ${SHASUM}"
 echo "Version: ${VERSION}"
