@@ -2,7 +2,7 @@
 
 set -e
 
-sudo apt update && sudo apt install -y curl jq
+sudo apt-get update && sudo apt-get install -y curl jq
 
 echo 'Gathering info...'
 
