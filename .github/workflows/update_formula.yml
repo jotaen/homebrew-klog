@@ -8,7 +8,7 @@ jobs:
 
     - name: Generate formula
       run: |
-         ./.github/generate-formula.sh --install
+         ./generate-formula.sh --install
       shell: sh
     - name: Commit changes
       uses: EndBug/add-and-commit@61a88be553afe4206585b31aa72387c64295d08b # Version 9.1.1
