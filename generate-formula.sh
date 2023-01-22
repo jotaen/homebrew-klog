@@ -14,8 +14,8 @@ VERSION="$(curl --silent https://api.github.com/repos/jotaen/klog/releases/lates
 URL_INTEL="https://github.com/jotaen/klog/releases/download/${VERSION}/klog-mac-intel.zip"
 URL_ARM="https://github.com/jotaen/klog/releases/download/${VERSION}/klog-mac-arm.zip"
 
-SHASUM_INTEL="$(curl -sL ${URL_INTEL} | sha256sum | head -c 64)"
-SHASUM_ARM="$(curl -sL ${URL_ARM} | sha256sum | head -c 64)"
+SHASUM_INTEL="$(curl -sL "${URL_INTEL}" | sha256sum | head -c 64)"
+SHASUM_ARM="$(curl -sL "${URL_ARM}" | sha256sum | head -c 64)"
 
 echo "Checksum Intel: ${SHASUM_INTEL}"
 echo "Checksum ARM: ${SHASUM_ARM}"
