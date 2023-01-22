@@ -3,6 +3,8 @@
 set -o errexit
 set -o pipefail
 
+THIS_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+
 if [[ "$1" == "--install" ]]; then
   echo 'Installing script dependencies...'
   sudo apt-get update
@@ -45,4 +47,4 @@ echo "class Klog < Formula
   def install
     bin.install 'klog'
   end
-end" > ./Formula/klog.rb
+end" > "${THIS_DIR}/Formula/klog.rb"
