@@ -1,11 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
-if command -v jq >/dev/null && command -v curl >/dev/null; then
-  echo "jq and curl found - skipping"
-else
-  sudo apt-get update && sudo apt-get install -y curl jq
+if [[ "$1" == "--install" ]]; then
+  echo 'Installing script dependencies...'
+  apt-get update
+  ! command -v curl >/dev/null && apt-get install -y curl
+  ! command -v jq >/dev/null && apt-get install -y jq
 fi
 
 echo 'Gathering info...'
