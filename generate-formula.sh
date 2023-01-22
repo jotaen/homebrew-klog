@@ -2,37 +2,42 @@
 
 set -e
 
-apt-get update
-apt-get install -y curl unzip jq
-
-TEMPDIR=$(mktemp -d)
-pushd $TEMPDIR
+if [[ "$1" == "--install" ]]; then
+  echo 'Installing script dependencies...'
+  apt-get update
+  ! command -v curl >/dev/null && apt-get install -y curl
+  ! command -v jq >/dev/null && apt-get install -y jq
+fi
 
 echo 'Gathering info...'
-curl \
-	--remote-name \
-	--location \
-	--silent \
-	https://github.com/jotaen/klog/releases/latest/download/klog-mac-intel.zip
-
-unzip klog-mac-intel.zip
-
-SHASUM="$(sha256sum klog-mac-intel.zip | head -c 64)"
 
 VERSION="$(curl --silent https://api.github.com/repos/jotaen/klog/releases/latest | jq -r '.name')"
+URL_INTEL="https://github.com/jotaen/klog/releases/download/${VERSION}/klog-mac-intel.zip"
+URL_ARM="https://github.com/jotaen/klog/releases/download/${VERSION}/klog-mac-arm.zip"
 
-popd
+SHASUM_INTEL="$(curl -sL "${URL_INTEL}" | sha256sum | head -c 64)"
+SHASUM_ARM="$(curl -sL "${URL_ARM}" | sha256sum | head -c 64)"
 
-echo "Checksum: ${SHASUM}"
+echo "Checksum Intel: ${SHASUM_INTEL}"
+echo "Checksum ARM: ${SHASUM_ARM}"
 echo "Version: ${VERSION}"
 
 echo 'Writing formula...'
 echo "class Klog < Formula
-  desc 'Time tracking CLI with plain-text files'
+  desc 'CLI tool for time tracking in plain-text files'
   homepage 'https://github.com/jotaen/klog'
-  url 'https://github.com/jotaen/klog/releases/download/${VERSION}/klog-mac-intel.zip'
-  sha256 '${SHASUM}'
   license 'MIT'
+
+  if Hardware::CPU.intel?
+    url '${URL_INTEL}'
+    sha256 '${SHASUM_INTEL}'
+  elsif Hardware::CPU.arm?
+    url '${URL_ARM}'
+    sha256 '${SHASUM_ARM}'
+  else
+    raise 'unexpected CPU'
+  end
+
   def install
     bin.install 'klog'
   end
