@@ -23,7 +23,7 @@ echo "Version: ${VERSION}"
 
 echo 'Writing formula...'
 echo "class Klog < Formula
-  desc 'Time tracking CLI with plain-text files'
+  desc 'CLI tool for time tracking in plain-text files'
   homepage 'https://github.com/jotaen/klog'
   license 'MIT'
 
