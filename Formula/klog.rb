@@ -13,6 +13,10 @@ class Klog < Formula
     raise 'unexpected CPU'
   end
 
+  opoo 'The jotaen/klog tap is currently looking for a maintainer.'
+  opoo 'It might otherwise be abandoned. If you’re interested to volunteer,'
+  opoo 'please see https://github.com/jotaen/homebrew-klog/issues/8'
+
   def install
     bin.install 'klog'
   end
