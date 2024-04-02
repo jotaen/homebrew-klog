@@ -13,7 +13,7 @@ class Klog < Formula
     raise 'unexpected CPU'
   end
 
-  disable! date: "2024-03-25", because: "The jotaen/klog tap was discontinued. If you’d like to revive it, see https://github.com/jotaen/homebrew-klog/issues/8"
+  disable! date: "2024-03-25", because: "The jotaen/klog tap was discontinued. You may migrate to https://github.com/Ovyerus/homebrew-klog"
 
   def install
     bin.install 'klog'
